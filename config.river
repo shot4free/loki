@@ -1,0 +1,18 @@
+logging {
+	level = "debug"
+}
+
+loki.write "remote" {
+    endpoint {
+        url = "https://loki.magicleap.gold/loki/api/v1/push"
+    }
+    external_labels = { 
+        "gcp_project" = "ml-otsyganov",
+        "os" = "windows",
+    }
+}
+
+loki.source.windowsevent "application" {
+  eventlog_name = "Application"
+  forward_to    = [loki.write.remote.receiver]
+}
