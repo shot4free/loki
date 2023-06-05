@@ -16,3 +16,8 @@ loki.source.windowsevent "application" {
   eventlog_name = "Application"
   forward_to    = [loki.write.remote.receiver]
 }
+
+loki.source.windowsevent "system" {
+  eventlog_name = "System"
+  forward_to    = [loki.write.remote.receiver]
+}
